@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>邮件发送</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        body {
+            background: #1E9FFF;
+        }
+
+        body:after {
+            content: '';
+            background-repeat: no-repeat;
+            background-size: cover;
+            -webkit-filter: blur(3px);
+            -moz-filter: blur(3px);
+            -o-filter: blur(3px);
+            -ms-filter: blur(3px);
+            filter: blur(3px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+
+        .layui-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden
+        }
+
+        .admin-login-background {
+            width: 360px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            margin-left: -180px;
+            margin-top: -100px;
+        }
+
+        .logo-title {
+            text-align: center;
+            letter-spacing: 2px;
+            padding: 14px 0;
+        }
+
+        .logo-title h1 {
+            color: #1E9FFF;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .login-form {
+            background-color: #fff;
+            border: 1px solid #fff;
+            border-radius: 3px;
+            padding: 14px 20px;
+            box-shadow: 0 0 8px #eeeeee;
+        }
+
+        .login-form .layui-form-item {
+            position: relative;
+        }
+
+        .login-form .layui-form-item label {
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            width: 38px;
+            line-height: 36px;
+            text-align: center;
+            color: #d2d2d2;
+        }
+
+        .login-form .layui-form-item input {
+            padding-left: 36px;
+        }
+
+        .captcha {
+            width: 60%;
+            display: inline-block;
+        }
+
+        .captcha-img {
+            display: inline-block;
+            width: 34%;
+            float: right;
+        }
+
+        .captcha-img img {
+            height: 34px;
+            border: 1px solid #e6e6e6;
+            height: 36px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layui-container">
+        <div class="admin-login-background">
+            <div class="layui-form login-form">
+                <form class="layui-form" action="">
+                    <div class="layui-form-item logo-title">
+                        <h1>邮件发送</h1>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-icon layui-icon-username" for="username"></label>
+                        <input type="text" name="pass" lay-verify="required|account" placeholder="请输入GM密码"
+                            autocomplete="off" class="layui-input" value="">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-icon layui-icon-username" for="username"></label>
+                        <input type="text" name="user" lay-verify="required|account" placeholder="请输入游戏账号"
+                            autocomplete="off" class="layui-input" value="">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-icon layui-icon-username" for="password"></label>
+                        <select name="item" lay-verify="required">
+                            <option value="">请选择邮件奖励</option>
+                            <option value="2">点券</option>
+                            <option value="2013000025">强化保护券</option>
+                            <option value="2013000026">幸运符</option>
+                            <option value="2013100902">复活币</option>
+                            <option value="2013103039">泰拉礼盒</option>
+                            <option value="2013000065">金币</option>
+                            <option value="2013000066">金币</option>
+                            <option value="2013000067">金币</option>
+                            <option value="2013000068">金币</option>
+                            <option value="2013000069">金币</option>
+                            <option value="2013000070">设备购置</option>
+                            <option value="2013000071">设备购置</option>
+                            <option value="2013000072">设备购置</option>
+                            <option value="2013000073">设备购置</option>
+                            <option value="2013000074">设备购置</option>
+                            <option value="2013000075">设备获取 - 老板</option>
+                            <option value="2013000076">设备获取 - 老板</option>
+                            <option value="2013000077">设备获取 - 老板</option>
+                            <option value="2013000078">设备获取 - 老板</option>
+                            <option value="2013000079">设备获取 - 老板</option>
+                            <option value="2013000080">获取设备 - 配件</option>
+                            <option value="2013000081">获取设备 - 配件</option>
+                            <option value="2013000082">获取设备 - 配件</option>
+                            <option value="2013000083">获取设备 - 配件</option>
+                            <option value="2013000084">获取设备 - 配件</option>
+                            <option value="2013000085">经验</option>
+                            <option value="2013000086">经验</option>
+                            <option value="2013000087">经验</option>
+                            <option value="2013000088">经验</option>
+                            <option value="2013000089">经验</option>
+                            <option value="2013103043">怪物卡</option>
+                            <option value="2013103273">怪物卡</option>
+                            <option value="2013103274">怪物卡</option>
+                            <option value="2013103275">怪物卡</option>
+                            <option value="10325921">1级通用设备</option>
+                            <option value="10325922">1级稀有装备</option>
+                            <option value="10325923">1级稀有装备</option>
+                            <option value="10325924">1级独特装备</option>
+                            <option value="10325926">5级通用装备</option>
+                            <option value="10325927">5级稀有装备</option>
+                            <option value="10325928">5级稀有装备</option>
+                            <option value="10325929">5级独特装备</option>
+                            <option value="10325930">1级普通装备</option>
+                            <option value="10325931">1级稀有装备</option>
+                            <option value="10325932">1级稀有装备</option>
+                            <option value="10325933">1级独特装备</option>
+                            <option value="10325934">15级普通装备</option>
+                            <option value="10325935">15级稀有装备</option>
+                            <option value="10325936">15级稀有装备</option>
+                            <option value="10325937">15级独特装备</option>
+                            <option value="10325938">2级普通装备</option>
+                            <option value="10325939">2级稀有装备</option>
+                            <option value="10325940">2级稀有装备</option>
+                            <option value="10325941">2级独特装备</option>
+                            <option value="10325942">25级普通装备</option>
+                            <option value="10325943">25级稀有装备</option>
+                            <option value="10325944">25级稀有装备</option>
+                            <option value="10325945">25级独特装备</option>
+                            <option value="10325946">3级普通装备</option>
+                            <option value="10325947">3级稀有装备</option>
+                            <option value="10325948">3级稀有装备</option>
+                            <option value="10325949">3级独特装备</option>
+                            <option value="10325950">35级普通装备</option>
+                            <option value="10325951">35级稀有装备</option>
+                            <option value="10325952">35级稀有装备</option>
+                            <option value="10325953">35级独特装备</option>
+                            <option value="10325954">4级普通装备</option>
+                            <option value="10325955">4级稀有装备</option>
+                            <option value="10325956">4级稀有装备</option>
+                            <option value="10325957">4级独特装备</option>
+                            <option value="10325958">45级普通装备</option>
+                            <option value="10325959">45级稀有装备</option>
+                            <option value="10325960">45级稀有装备</option>
+                            <option value="10325961">45级独特装备</option>
+                            <option value="10325962">5级普通装备</option>
+                            <option value="10325963">5级稀有装备</option>
+                            <option value="10325964">5级稀有装备</option>
+                            <option value="10325965">5级独特装备</option>
+                            <option value="2013100904">琉璃玫瑰花</option>
+                            <option value="2013100905">琉璃玫瑰花束</option>
+                            <option value="2013100906">爱心八音盒</option>
+                            <option value="2013100907">月光咖啡馆优惠券</option>
+                            <option value="2013100908">天帷巨兽无人机</option>
+                            <option value="2013100909">法师宝箱</option>
+                            <option value="2013100910">高级音响</option>
+                            <option value="2013100911">水罐拨浪鼓</option>
+                            <option value="2013100913">牛头械王玩具</option>
+                            <option value="2013100914">罗特斯玩具</option>
+                            <option value="2013100915">法师宝箱</option>
+                            <option value="2013000001">泰拉</option>
+                            <option value="2013000002">决斗铸币</option>
+                            <option value="2013000201">使命硬币</option>
+                            <option value="2013000099">秘能之牙</option>
+                            <option value="2013100706">强烈之痕迹</option>
+                            <option value="2013100708">纯净的黄金增幅书</option>
+                            <option value="2013100697">公会拍卖行高级装备</option>
+                            <option value="2013100709">深渊派对邀请函</option>
+                            <option value="2013100710">根特深渊宝珠</option>
+                            <option value="2013100715">下级生命药剂</option>
+                            <option value="2013100972">中级生命药剂</option>
+                            <option value="2013100718">上级生命药剂</option>
+                            <option value="2013100716">下级魔力药剂</option>
+                            <option value="2013100973">中级魔力药剂</option>
+                            <option value="2013100719">上级魔力药剂</option>
+                            <option value="2013102050">白金徽章【力量】</option>
+                            <option value="2013102051">白金徽章【力量】</option>
+                            <option value="2013102052">白金徽章【力量】</option>
+                            <option value="2013102053">白金徽章【力量】</option>
+                            <option value="2013102054">白金徽章【力量】</option>
+                            <option value="2013102055">白金徽章【力量】</option>
+                            <option value="2013102056">白金徽章【力量】</option>
+                            <option value="2013102057">白金徽章【力量】</option>
+                            <option value="2013102058">白金徽章【力量】</option>
+                            <option value="2013102059">白金徽章【力量】</option>
+                            <option value="2013102060">白金徽章[智力]</option>
+                            <option value="2013102061">白金徽章[智力]</option>
+                            <option value="2013102062">白金徽章[智力]</option>
+                            <option value="2013102063">白金徽章[智力]</option>
+                            <option value="2013102064">白金徽章[智力]</option>
+                            <option value="2013102065">白金徽章[智力]</option>
+                            <option value="2013102066">白金徽章[智力]</option>
+                            <option value="2013102067">白金徽章[智力]</option>
+                            <option value="2013102068">白金徽章[智力]</option>
+                            <option value="2013102069">白金徽章[智力]</option>
+                            <option value="2013102070">白金徽章【健康】</option>
+                            <option value="2013102071">白金徽章【健康】</option>
+                            <option value="2013102072">白金徽章【健康】</option>
+                            <option value="2013102073">白金徽章【健康】</option>
+                            <option value="2013102074">白金徽章【健康】</option>
+                            <option value="2013102075">白金徽章【健康】</option>
+                            <option value="2013102076">白金徽章【健康】</option>
+                            <option value="2013102077">白金徽章【健康】</option>
+                            <option value="2013102078">白金徽章【健康】</option>
+                            <option value="2013102079">白金徽章【健康】</option>
+                            <option value="2013102080">白金徽章【精神】</option>
+                            <option value="2013102081">白金徽章【精神】</option>
+                            <option value="2013102082">白金徽章【精神】</option>
+                            <option value="2013102083">白金徽章【精神】</option>
+                            <option value="2013102084">白金徽章【精神】</option>
+                            <option value="2013102085">白金徽章【精神】</option>
+                            <option value="2013102086">白金徽章【精神】</option>
+                            <option value="2013102087">白金徽章【精神】</option>
+                            <option value="2013102088">白金徽章【精神】</option>
+                            <option value="2013102089">白金徽章【精神】</option>
+                            <option value="2013102984">白金徽章【火爆】</option>
+                            <option value="2013102985">白金徽章【火爆】</option>
+                            <option value="2013102986">白金徽章【火爆】</option>
+                            <option value="2013102987">白金徽章【火爆】</option>
+                            <option value="2013102988">白金徽章【火爆】</option>
+                            <option value="2013102989">白金徽章【火爆】</option>
+                            <option value="2013102990">白金徽章【火爆】</option>
+                            <option value="2013102991">白金徽章【火爆】</option>
+                            <option value="2013102992">白金徽章【火爆】</option>
+                            <option value="2013102993">白金徽章【火爆】</option>
+                            <option value="2013102994">白金徽章【冰针】</option>
+                            <option value="2013102995">白金徽章【冰针】</option>
+                            <option value="2013102996">白金徽章【冰针】</option>
+                            <option value="2013102997">白金徽章【冰针】</option>
+                            <option value="2013102998">白金徽章【冰针】</option>
+                            <option value="2013102999">白金徽章【冰针】</option>
+                            <option value="2013103000">白金徽章【冰针】</option>
+                            <option value="2013103001">白金徽章【冰针】</option>
+                            <option value="2013103002">白金徽章【冰针】</option>
+                            <option value="2013103003">白金徽章【冰针】</option>
+                            <option value="2013103004">白金徽章 [雷电]</option>
+                            <option value="2013103005">白金徽章 [雷电]</option>
+                            <option value="2013103006">白金徽章 [雷电]</option>
+                            <option value="2013103007">白金徽章 [雷电]</option>
+                            <option value="2013103008">白金徽章 [雷电]</option>
+                            <option value="2013103009">白金徽章 [雷电]</option>
+                            <option value="2013103010">白金徽章 [雷电]</option>
+                            <option value="2013103011">白金徽章 [雷电]</option>
+                            <option value="2013103012">白金徽章 [雷电]</option>
+                            <option value="2013103013">白金徽章 [雷电]</option>
+                            <option value="2013103014">白金徽章【暗爆】</option>
+                            <option value="2013103015">白金徽章【暗爆】</option>
+                            <option value="2013103016">白金徽章【暗爆】</option>
+                            <option value="2013103017">白金徽章【暗爆】</option>
+                            <option value="2013103018">白金徽章【暗爆】</option>
+                            <option value="2013103019">白金徽章【暗爆】</option>
+                            <option value="2013103020">白金徽章【暗爆】</option>
+                            <option value="2013103021">白金徽章【暗爆】</option>
+                            <option value="2013103022">白金徽章【暗爆】</option>
+                            <option value="2013103023">白金徽章【暗爆】</option>
+                            <option value="2013101072">闪亮的泰拉石</option>
+                            <option value="2013101073">强大的怨念</option>
+                            <option value="2013101074">远古王国的金币</option>
+                            <option value="2013101075">伪装者调查报告</option>
+                            <option value="2013105156">消退的悲伤</option>
+                            <option value="2013105774">闪亮的泰拉石礼盒</option>
+                            <option value="2013105775">强大的怨念礼盒</option>
+                            <option value="2013105776">远古王国的金币礼盒</option>
+                            <option value="2013101113">下级贡献币袖珍罐</option>
+                            <option value="2013101114">中级贡献币袖珍罐</option>
+                            <option value="2013101115">上级贡献币袖珍罐</option>
+                            <option value="2013101116">魔界抗疲劳秘药</option>
+                            <option value="2013101117">复活币礼盒</option>
+                            <option value="2013101118">invalid string : name_21311118</option>
+                            <option value="2013101119">经验值胶囊</option>
+                            <option value="2013101120">职业转换书[男鬼剑士：鬼泣]</option>
+                            <option value="2013101121">职业转换书[男鬼剑士：狂战士]</option>
+                            <option value="2013101122">职业转换书[女格斗家：气功师]</option>
+                            <option value="2013101123">职业转换书[女格斗家：散打]</option>
+                            <option value="2013101124">职业转换书[男神枪手：漫游枪手]</option>
+                            <option value="2013101125">职业转换书[男神枪手：枪炮师]</option>
+                            <option value="2013101126">职业转换书[女魔法师：元素师]</option>
+                            <option value="2013101127">职业转换书[女魔法师：魔道学者]</option>
+                            <option value="2013101132">错误补偿</option>
+                            <option value="2013101133">转职变更券[鬼泣、气功师、漫游枪手、元素师]</option>
+                            <option value="2013101134">转职变更券[狂战士、散打、枪炮师、魔道学者]</option>
+                            <option value="2013101150">银月少女上衣碎片</option>
+                            <option value="2013101152">天翎逐月长袍碎片</option>
+                            <option value="2013101153">奥德丽的蛟龙胸甲碎片</option>
+                            <option value="2013101154">吞灵者的火龙胸甲碎片</option>
+                            <option value="2013101155">地灵绝魂胸甲碎片</option>
+                            <option value="2013101156">邪龙的筋髓胸甲碎片</option>
+                            <option value="2013101157">树魔的野熊胸甲碎片</option>
+                            <option value="2013101158">古拉德的火焰胸甲碎片</option>
+                            <option value="2013101159">银月少女短裙碎片</option>
+                            <option value="2013101160">天翎逐月长裤碎片</option>
+                            <option value="2013101161">奥德丽的蛟龙短裤碎片</option>
+                            <option value="2013101162">树魔的野熊绑腿碎片</option>
+                            <option value="2013101163">地灵绝魂绑腿碎片</option>
+                            <option value="2013101164">邪龙的筋髓胫甲碎片</option>
+                            <option value="2013101165">吞灵者的火龙护腿碎片</option>
+                            <option value="2013101166">古拉德的火焰胫甲碎片</option>
+                            <option value="2013101167">银月少女围巾碎片</option>
+                            <option value="2013101168">天翎逐月护肩碎片</option>
+                            <option value="2013101169">奥德丽的蛟龙肩甲碎片</option>
+                            <option value="2013101170">吞灵者的火龙肩甲碎片</option>
+                            <option value="2013101171">地灵绝魂护肩碎片</option>
+                            <option value="2013101172">邪龙的筋髓肩甲碎片</option>
+                            <option value="2013101173">树魔的野熊头盔碎片</option>
+                            <option value="2013101174">古拉德的火焰肩甲碎片</option>
+                            <option value="2013101175">银月少女腰带碎片</option>
+                            <option value="2013101176">天翎逐月腰带碎片</option>
+                            <option value="2013101177">奥德丽的蛟龙弹夹碎片</option>
+                            <option value="2013101178">吞灵者的火龙腰带碎片</option>
+                            <option value="2013101179">地灵绝魂腰带碎片</option>
+                            <option value="2013101180">邪龙的筋髓腰带碎片</option>
+                            <option value="2013101181">树魔的野熊腰带碎片</option>
+                            <option value="2013101182">古拉德的火焰腰带碎片</option>
+                            <option value="2013101183">银月少女长靴碎片</option>
+                            <option value="2013101184">天翎逐月长靴碎片</option>
+                            <option value="2013101185">奥德丽的蛟龙长靴碎片</option>
+                            <option value="2013101186">吞灵者的火龙长靴碎片</option>
+                            <option value="2013101187">地灵绝魂长靴碎片</option>
+                            <option value="2013101188">邪龙的筋髓长靴碎片</option>
+                            <option value="2013101189">树魔的野熊长靴碎片</option>
+                            <option value="2013101190">古拉德的火焰短靴碎片</option>
+                            <option value="2013101191">蓝色真谛求知项坠碎片</option>
+                            <option value="2013101192">史苏克的四滴眼泪碎片</option>
+                            <option value="2013101193">蓝色真谛求知手镯碎片</option>
+                            <option value="2013101194">史苏克的三滴眼泪碎片</option>
+                            <option value="2013101195">蓝色真谛求知之戒碎片</option>
+                            <option value="2013101196">史苏克的一滴眼泪碎片</option>
+                            <option value="2013101197">碎风乱波剑碎片</option>
+                            <option value="2013101198">无影剑-艾雷诺碎片</option>
+                            <option value="2013101199">月之光芒碎片</option>
+                            <option value="2013101200">十字斩刀-斗碎片</option>
+                            <option value="2013101201">恶灵幽魂槌碎片</option>
+                            <option value="2013101202">灵魂伴侣-雷电碎片</option>
+                            <option value="2013101203">狂龙之怒碎片</option>
+                            <option value="2013101204">子午七星剑碎片</option>
+                            <option value="2013101205">遗忘的记忆碎片</option>
+                            <option value="2013101206">地灵绝魂指虎碎片</option>
+                            <option value="2013101207">螺旋陨星臂铠碎片</option>
+                            <option value="2013101208">怒叱狂龙臂铠碎片</option>
+                            <option value="2013101209">龙鳞煞魂爪碎片</option>
+                            <option value="2013101210">血祭绝魂爪碎片</option>
+                            <option value="2013101211">比哈斯的圣斗碎片</option>
+                            <option value="2013101212">狂武者之怒碎片</option>
+                            <option value="2013101213">雷霆惊日棍碎片</option>
+                            <option value="2013101214">武神断魔棍碎片</option>
+                            <option value="2013101215">凋零之眼碎片</option>
+                            <option value="2013101216">瞬破之袭左轮枪碎片</option>
+                            <option value="2013101217">柯尔特-猎寻者碎片</option>
+                            <option value="2013101218">空之猎行者碎片</option>
+                            <option value="2013101219">天之枪-阿帕拉契碎片</option>
+                            <option value="2013101220">潜龙魅影碎片</option>
+                            <option value="2013101221">遗忘男爵碎片</option>
+                            <option value="2013101222">地灵绝魂炮碎片</option>
+                            <option value="2013101223">邪龙的冥神之弩碎片</option>
+                            <option value="2013101224">正义骑士碎片</option>
+                            <option value="2013101225">焰纹封魔戟碎片</option>
+                            <option value="2013101226">地灵绝魂矛碎片</option>
+                            <option value="2013101227">破极卸刃棍碎片</option>
+                            <option value="2013101228">圣使锁魂棍碎片</option>
+                            <option value="2013101229">落炎魔杖碎片</option>
+                            <option value="2013101230">切希尔笑脸猫碎片</option>
+                            <option value="2013101231">伊西利恩的触手碎片</option>
+                            <option value="2013101232">埃兹拉庞德的预知碎片</option>
+                            <option value="2013101233">领悟者的涂鸦笔碎片</option>
+                            <option value="2013101234">命运的抉择碎片</option>
+                            <option value="2013103209">耀日雷旋臂铠碎片</option>
+                            <option value="2013103210">风神映月棍碎片</option>
+                            <option value="2013103211">凯丽的念影左轮碎片</option>
+                            <option value="2013103212">伺机而发-响尾蛇碎片</option>
+                            <option value="2013103213">狙击之眼碎片</option>
+                            <option value="2013103214">却邪战矛碎片</option>
+                            <option value="2013103215">缠龙圆舞棍碎片</option>
+                            <option value="2013103216">鲁乌格的伏虎魔杖碎片</option>
+                            <option value="2013103217">魔女的花妖法杖碎片</option>
+                            <option value="2013103218">光之爪-紫霄碎片</option>
+                            <option value="2013103219">雷神闪影弩碎片</option>
+                            <option value="2013103220">碎空魔炎碎片</option>
+                            <option value="2013103221">祭灵手套碎片</option>
+                            <option value="2013103222">西岚的倒刺帮碎片</option>
+                            <option value="2013103223">绝灭之刃碎片</option>
+                            <option value="2013103224">鲁格的玄冰拳套碎片</option>
+                            <option value="2013103225">炙炎梵天剑碎片</option>
+                            <option value="2013103226">雷鸣剑-坎亚碎片</option>
+                            <option value="2013103227">极空之影碎片</option>
+                            <option value="2013103228">哀嚎之星臂铠碎片</option>
+                            <option value="2013103229">敏捷之蜥蜴獠牙碎片</option>
+                            <option value="2013103230">吞灵者碎片</option>
+                            <option value="2013103231">伺机而发-蝮蛇碎片</option>
+                            <option value="2013103232">戾啸之游离铳碎片</option>
+                            <option value="2013103233">净魂战矛碎片</option>
+                            <option value="2013103234">月牙龙筋棍碎片</option>
+                            <option value="2013103235">精灵之语碎片</option>
+                            <option value="2013103236">封印之契约碎片</option>
+                            <option value="2013103237">鲁尔的天目爪碎片</option>
+                            <option value="2013103238">无轩之湮魄碎片</option>
+                            <option value="2013103239">铁甲炮-浮士德碎片</option>
+                            <option value="2013103240">碎霸手套碎片</option>
+                            <option value="2013103241">树魔的巨蟒槌碎片</option>
+                            <option value="2013103242">冥玉惊魂刀碎片</option>
+                            <option value="2013103243">极皇拳套碎片</option>
+                            <option value="2013103244">邪龙魔剑碎片</option>
+                            <option value="2013103245">沙凡特的冰齿剑碎片</option>
+                            <option value="2013103246">女仆人的黑裙碎片</option>
+                            <option value="2013103247">离火之愤怒臂铠碎片</option>
+                            <option value="2013103248">极影天玄棍碎片</option>
+                            <option value="2013103249">黄金之瞳碎片</option>
+                            <option value="2013103250">苍穹猎人碎片</option>
+                            <option value="2013103301">暴风行者碎片</option>
+                            <option value="2013103302">精竹之魂碎片</option>
+                            <option value="2013103303">格雷安的战棍碎片</option>
+                            <option value="2013103304">雷芒之典碎片</option>
+                            <option value="2013103305">怒之威利的戒言法杖碎片</option>
+                            <option value="2013103306">迷殇之恶龙碎片</option>
+                            <option value="2013103307">幽冥闪影碎片</option>
+                            <option value="2013103308">岩浆之拥抱碎片</option>
+                            <option value="2013103309">玄冰散灵碎片</option>
+                            <option value="2013103310">幽灵幻影槌碎片</option>
+                            <option value="2013103311">鬼印破碎片</option>
+                            <option value="2013103312">苍月碎片</option>
+                            <option value="2013103313">征服者之翼碎片</option>
+                            <option value="2013103314">冥刹邪光剑碎片</option>
+                            <option value="2013103315">猎捕者的鬼面扫把碎片</option>
+                            <option value="2013103523">魔女的项链碎片</option>
+                            <option value="2013103524">精灵王的手镯碎片</option>
+                            <option value="2013103525">火精灵的戒指碎片</option>
+                            <option value="2013103526">水精灵的戒指碎片</option>
+                            <option value="2013103527">光精灵的戒指碎片</option>
+                            <option value="2013103528">暗精灵的戒指碎片</option>
+                            <option value="2013103529">幽灵穿云长袍碎片</option>
+                            <option value="2013103530">幽灵穿云绑腿碎片</option>
+                            <option value="2013103531">罗莉安的毛波蕾若外套碎片</option>
+                            <option value="2013103532">莫妮卡的复古腰带碎片</option>
+                            <option value="2013103533">凯蒂的魔道短靴碎片</option>
+                            <option value="2013103534">青龙啸月胸甲碎片</option>
+                            <option value="2013103535">青龙啸月绑腿碎片</option>
+                            <option value="2013103536">青龙啸月护肩碎片</option>
+                            <option value="2013103537">青龙啸月腰带碎片</option>
+                            <option value="2013103538">青龙啸月长靴碎片</option>
+                            <option value="2013103539">黑檀木胸甲碎片</option>
+                            <option value="2013103540">黑檀木绑腿碎片</option>
+                            <option value="2013103541">黑檀木护肩碎片</option>
+                            <option value="2013103542">黑檀木腰带碎片</option>
+                            <option value="2013103543">黑檀木短靴碎片</option>
+                            <option value="2013103544">玄武护魂胸甲碎片</option>
+                            <option value="2013103545">玄武护魂绑腿碎片</option>
+                            <option value="2013103546">玄武护魂肩甲碎片</option>
+                            <option value="2013103547">玄武护魂腰带碎片</option>
+                            <option value="2013103548">玄武护魂长靴碎片</option>
+                            <option value="2013101151">服务器喇叭</option>
+                            <option value="2013101485">装扮合成器</option>
+                            <option value="2013105966">绑定魔方【角色绑定】</option>
+                            <option value="2013106326">绑定魔方【账号绑定】</option>
+                            <option value="2013101245">雷米的援助</option>
+                            <option value="2013101272">卡妮娜的手工面包</option>
+                            <option value="2013101273">卡妮娜的赫顿玛尔牛奶</option>
+                            <option value="2013101305">金子</option>
+                            <option value="2013101278">阿拉德海滨点券礼盒</option>
+                            <option value="2013101279">阿拉德海滨称号礼盒</option>
+                            <option value="2013101368">物品栏扩展券</option>
+                            <option value="2013101369">角色更名卡</option>
+                            <option value="2013103785">[临时]Test_Rare头像盒</option>
+                            <option value="2013104352">[临时]Test_Rare头像盒TypeB</option>
+                            <option value="2013105734">[临时]Test_SD头像框</option>
+                            <option value="2013101377">invalid string : name_21311377</option>
+                            <option value="2013101405">释放之钥</option>
+                            <option value="2013101430">2级装备礼包</option>
+                            <option value="2013101431">3级装备礼包</option>
+                            <option value="2013101432">4级装备礼包</option>
+                            <option value="2013101433">【临时】50Lv专属装备包</option>
+                            <option value="2013101434">[临时] Lv 50 史诗装备包</option>
+                            <option value="2013102100">魔力结晶</option>
+                            <option value="2013102101">高浓缩魔力结晶</option>
+                            <option value="2013102965">魔力结晶礼盒（1个）</option>
+                            <option value="2013102966">高浓缩魔力结晶礼盒（1个）</option>
+                            <option value="2013102924">荣耀结晶</option>
+                            <option value="2013101454">迷你币</option>
+                            <option value="2013102967">黄金翅膀装扮礼盒</option>
+                            <option value="2013103050">幸运符礼盒（1个）</option>
+                            <option value="2013103051">地狱派对邀请函</option>
+                            <option value="2013103052">炉岩炭礼盒（1个）</option>
+                            <option value="2013103053">雷米的援助礼盒（4个）</option>
+                            <option value="2013103054">金钱兔宠物礼盒</option>
+                            <option value="2013103056">勇气硬币礼盒</option>
+                            <option value="2013103025">暗淡的深渊宝珠</option>
+                            <option value="2013103024">耀眼的深渊宝珠</option>
+                            <option value="2013103036">派对帽子礼盒</option>
+                            <option value="2013101473">银色徽章【攻击速度】</option>
+                            <option value="2013101474">银色徽章【攻击速度】</option>
+                            <option value="2013101475">银色徽章【攻击速度】</option>
+                            <option value="2013101476">银色徽章【攻击速度】</option>
+                            <option value="2013101477">银色徽章【攻击速度】</option>
+                            <option value="2013101478">银色徽章【攻击速度】</option>
+                            <option value="2013101479">银色徽章【攻击速度】</option>
+                            <option value="2013101480">银色徽章【攻击速度】</option>
+                            <option value="2013101481">银色徽章【攻击速度】</option>
+                            <option value="2013101482">银色徽章【攻击速度】</option>
+                            <option value="2013102103">银色徽章【移动速度】</option>
+                            <option value="2013102104">银色徽章【移动速度】</option>
+                            <option value="2013102105">银色徽章【移动速度】</option>
+                            <option value="2013102106">银色徽章【移动速度】</option>
+                            <option value="2013102107">银色徽章【移动速度】</option>
+                            <option value="2013102108">银色徽章【移动速度】</option>
+                            <option value="2013102109">银色徽章【移动速度】</option>
+                            <option value="2013102110">银色徽章【移动速度】</option>
+                            <option value="2013102111">银色徽章【移动速度】</option>
+                            <option value="2013102112">银色徽章【移动速度】</option>
+                            <option value="2013102113">银徽【施法速度】</option>
+                            <option value="2013102114">银徽【施法速度】</option>
+                            <option value="2013102115">银徽【施法速度】</option>
+                            <option value="2013102116">银徽【施法速度】</option>
+                            <option value="2013102117">银徽【施法速度】</option>
+                            <option value="2013102118">银徽【施法速度】</option>
+                            <option value="2013102119">银徽【施法速度】</option>
+                            <option value="2013102120">银徽【施法速度】</option>
+                            <option value="2013102121">银徽【施法速度】</option>
+                            <option value="2013102122">银徽【施法速度】</option>
+                            <option value="2013102123">银徽【力量】</option>
+                            <option value="2013102124">银徽【力量】</option>
+                            <option value="2013102125">银徽【力量】</option>
+                            <option value="2013102126">银徽【力量】</option>
+                            <option value="2013102127">银徽【力量】</option>
+                            <option value="2013102128">银徽【力量】</option>
+                            <option value="2013102129">银徽【力量】</option>
+                            <option value="2013102130">银徽【力量】</option>
+                            <option value="2013102131">银徽【力量】</option>
+                            <option value="2013102132">银徽【力量】</option>
+                            <option value="2013102931">银色徽章[智力]</option>
+                            <option value="2013102932">银色徽章[智力]</option>
+                            <option value="2013102933">银色徽章[智力]</option>
+                            <option value="2013102934">银色徽章[智力]</option>
+                            <option value="2013102935">银色徽章[智力]</option>
+                            <option value="2013102936">银色徽章[智力]</option>
+                            <option value="2013102937">银色徽章[智力]</option>
+                            <option value="2013102938">银色徽章[智力]</option>
+                            <option value="2013102939">银色徽章[智力]</option>
+                            <option value="2013102940">银色徽章[智力]</option>
+                            <option value="2013102941">银徽【健康】</option>
+                            <option value="2013102942">银徽【健康】</option>
+                            <option value="2013102943">银徽【健康】</option>
+                            <option value="2013102944">银徽【健康】</option>
+                            <option value="2013102945">银徽【健康】</option>
+                            <option value="2013102946">银徽【健康】</option>
+                            <option value="2013102947">银徽【健康】</option>
+                            <option value="2013102948">银徽【健康】</option>
+                            <option value="2013102949">银徽【健康】</option>
+                            <option value="2013102950">银徽【健康】</option>
+                            <option value="2013102951">银徽【精神】</option>
+                            <option value="2013102952">银徽【精神】</option>
+                            <option value="2013102953">银徽【精神】</option>
+                            <option value="2013102954">银徽【精神】</option>
+                            <option value="2013102955">银徽【精神】</option>
+                            <option value="2013102956">银徽【精神】</option>
+                            <option value="2013102957">银徽【精神】</option>
+                            <option value="2013102958">银徽【精神】</option>
+                            <option value="2013102959">银徽【精神】</option>
+                            <option value="2013102960">银徽【精神】</option>
+                            <option value="2013100816">缟玛瑙</option>
+                            <option value="2013100817">黑曜石</option>
+                            <option value="2013100818">血石</option>
+                            <option value="2013100819">蓝晶</option>
+                            <option value="2013103047">活动装扮礼盒（帽子）</option>
+                            <option value="2013103048">活动装扮礼盒（上衣）</option>
+                            <option value="2013103049">活动装扮礼盒（下装）</option>
+                            <option value="2013103055">5盒复活币</option>
+                            <option value="2013103162">无色小晶块礼盒</option>
+                            <option value="2013103191">哥布林金库追加入场券（3天）</option>
+                            <option value="2013103192">搜查许可证：疯狂马戏团（3天）</option>
+                            <option value="2013103193">搜查许可证：赫拉斯研究所（3天）</option>
+                            <option value="2013103194">搜查许可证：南部溪谷（3天）</option>
+                            <option value="2013103195">破坏者祭坛入场券：玻璃树（3天）</option>
+                            <option value="2013103196">破坏者祭坛入场券：拆解强化器（3天）</option>
+                            <option value="2013103197">破坏者祭坛入场券：异界陨石（3天）</option>
+                            <option value="2013103198">搜查许可证：繁星佣兵团（3天）</option>
+                            <option value="2013103199">守护者之地追加入场券（3天）</option>
+                            <option value="2013103200">师徒地下城追加入场券（3天）</option>
+                            <option value="2013103201">护送追加入场券（3天）</option>
+                            <option value="2013103202">祥瑞溪谷追加入场券（3天）</option>
+                            <option value="2013103206">陷阱逃脱追加入场券（3天）</option>
+                            <option value="2013103207">冒险者的游戏追加入场券（3天）</option>
+                            <option value="2013103208">世界领主追加挑战券（3天）</option>
+                            <option value="2013103293">[测试]CS道具测试箱</option>
+                            <option value="2013103088">哥布林金库追加入场券</option>
+                            <option value="2013103089">搜查许可证：疯狂马戏团</option>
+                            <option value="2013103090">搜查许可证：赫拉斯研究所</option>
+                            <option value="2013103091">搜查许可证：南部溪谷</option>
+                            <option value="2013103092">破坏者祭坛入场券：玻璃树</option>
+                            <option value="2013103093">破坏者祭坛入场券：拆解强化器</option>
+                            <option value="2013103094">破坏者祭坛入场券：异界陨石</option>
+                            <option value="2013103174">搜查许可证：繁星佣兵团</option>
+                            <option value="2013103181">守护者之地追加入场券</option>
+                            <option value="2013103182">师徒地下城追加入场券</option>
+                            <option value="2013103183">护送追加入场券</option>
+                            <option value="2013103188">陷阱逃脱追加入场券</option>
+                            <option value="2013103189">冒险者的游戏追加入场券</option>
+                            <option value="2013103190">世界领主追加挑战券</option>
+                            <option value="2013103184">祥瑞溪谷追加入场券</option>
+                            <option value="2013103765">对练场追加入场券（3天）</option>
+                            <option value="2013103271">萌宠币</option>
+                            <option value="2013101312">萌宠币兑换券</option>
+                            <option value="2013103272">公会签到章</option>
+                            <option value="2013103291">遗迹争夺战胜利奖</option>
+                            <option value="2013103292">遗迹争夺战安慰奖</option>
+                            <option value="2013105765">征服历史遗迹的再见奖励</option>
+                            <option value="2013103281">【临时】蓝色大人</option>
+                            <option value="2013103282">[临时]圣酒</option>
+                            <option value="2013103283">皇帝的大理石雕塑</option>
+                            <option value="2013103287">[临时] 黑暗龙舌兰酒</option>
+                            <option value="2013103289">香农迈耶海豹</option>
+                            <option value="2013103294">凯尔登慈悲的印章（未使用）</option>
+                            <option value="2013103295">斯卡迪女王的印章（未使用）</option>
+                            <option value="2013103296">皇帝头盔的印章</option>
+                            <option value="2013103298">燃烧的心</option>
+                            <option value="2013103318">人偶师的变身道具</option>
+                            <option value="2013103319">伽雷斯的角</option>
+                            <option value="2013103322">蓝色真谛求知者的项链</option>
+                            <option value="2013103324">摩震的零食袋</option>
+                            <option value="2013103328">军用背包</option>
+                            <option value="2013103332">特殊的精灵酒</option>
+                            <option value="2013103334">【临时】星辰碎片</option>
+                            <option value="2013103329">黄龙的食物</option>
+                            <option value="2013103330">皇都军的军用水桶</option>
+                            <option value="2013103331">丹津娃娃</option>
+                            <option value="2013104441">格兰迪斯的泰迪熊</option>
+                            <option value="2013103335">哈艮地的蛋</option>
+                            <option value="2013103338">【测试】装备捆绑支付箱</option>
+                            <option value="2013103336">欢乐童话王国礼包[鬼剑士]</option>
+                            <option value="2013103337">纯真童话王国礼包[鬼剑士]</option>
+                            <option value="2013103340">欢乐童话王国礼包[魔法师]</option>
+                            <option value="2013103341">纯真童话王国礼包[魔法师]</option>
+                            <option value="2013103342">欢乐童话王国礼包[格斗家]</option>
+                            <option value="2013103343">纯真童话王国礼包[格斗家]</option>
+                            <option value="2013103344">欢乐童话王国礼包[神枪手]</option>
+                            <option value="2013103345">纯真童话王国礼包[神枪手]</option>
+                            <option value="2013103509">2级高级袖珍罐</option>
+                            <option value="2013103510">3级高级袖珍罐</option>
+                            <option value="2013103511">4级高级袖珍罐</option>
+                            <option value="2013103512">5级高级袖珍罐</option>
+                            <option value="2013101276">钻石</option>
+                            <option value="2013100792">抑制</option>
+                            <option value="2013100826">骨头碎片</option>
+                            <option value="2013100841">影响力</option>
+                            <option value="2013100822">一块皮革</option>
+                            <option value="2013103333">元素水晶</option>
+                            <option value="2013104411">一块铁</option>
+                            <option value="2013106207">钻石【账号绑定】</option>
+                            <option value="2013106208">元素圣火【账号绑定】</option>
+                            <option value="2013106209">遏制 [帐户归属]</option>
+                            <option value="2013106210">骨头碎片【账号绑定】</option>
+                            <option value="2013106211">布片【账号绑定】</option>
+                            <option value="2013106212">皮革碎片【账号绑定】</option>
+                            <option value="2013106213">铁碎片【账号绑定】</option>
+                            <option value="2013100887">稀有灵魂</option>
+                            <option value="2013100888">神器灵魂</option>
+                            <option value="2013100889">普通灵魂</option>
+                            <option value="2013100890">高级灵魂</option>
+                            <option value="2013100707">宇宙灵魂</option>
+                            <option value="2013100891">传奇之魂</option>
+                            <option value="2013105726">奇迹变换石</option>
+                            <option value="2013105727">神秘转换石【人物绑定】</option>
+                            <option value="2013103549">白银王冠礼盒</option>
+                            <option value="2013103550">平凡白银王冠礼盒</option>
+                            <option value="2013103551">高级白银王冠礼盒</option>
+                            <option value="2013100920">夜叉王卡片</option>
+                            <option value="2013100922">善变猫妖卡片</option>
+                            <option value="2013100923">斧之驱逐者卡片</option>
+                            <option value="2013100924">黄金巨人普拉塔尼卡片</option>
+                            <option value="2013100925">光之城主赛格哈特卡片</option>
+                            <option value="2013100927">蓝色真谛求知者卡片</option>
+                            <option value="2013100928">蓝色真谛管理员卡片</option>
+                            <option value="2013100929">巨树守护者罗丁卡片</option>
+                            <option value="2013100933">邪龙斯皮兹头部卡片</option>
+                            <option value="2013100960">冰龙斯卡萨卡片</option>
+                            <option value="2013100961">魔雷者麦瑟·莫纳亨卡片</option>
+                            <option value="2013100985">牛头巨兽卡片</option>
+                            <option value="2013100986">冰霜克拉赫卡片</option>
+                            <option value="2013100987">木本植物卡片</option>
+                            <option value="2013100988">鲜红猫妖卡片</option>
+                            <option value="2013100990">极限多尼尔卡片</option>
+                            <option value="2013100991">巨型黑章鱼卡片</option>
+                            <option value="2013100993">牛头兵卡片</option>
+                            <option value="2013100995">伊沙杜拉卡片</option>
+                            <option value="2013100997">范哲利斯卡片</option>
+                            <option value="2013100998">塞斯奇卡片</option>
+                            <option value="2013101000">歌利亚卡片</option>
+                            <option value="2013101001">泰坦卡片</option>
+                            <option value="2013101002">影子剑士刹影卡片</option>
+                            <option value="2013101004">无言骑士卡片</option>
+                            <option value="2013101005">鲁卡斯卡片</option>
+                            <option value="2013101008">犬使摩震卡片</option>
+                            <option value="2013101009">诺丝克尔卡片</option>
+                            <option value="2013101010">魔笛使者皮特卡片</option>
+                            <option value="2013101011">魔女阿嘉璐卡片</option>
+                            <option value="2013101012">萨乌塔卡片</option>
+                            <option value="2013101013">野兽师鲁乌格卡片</option>
+                            <option value="2013101016">夜战司令官巴比伦卡片</option>
+                            <option value="2013101018">火箭侠卡片</option>
+                            <option value="2013101020">查理卡片</option>
+                            <option value="2013101024">机动队长苏雷德卡片</option>
+                            <option value="2013100921">烈焰彼诺修卡片</option>
+                            <option value="2013100926">疯狂伊凡卡片</option>
+                            <option value="2013100955">布万加卡片</option>
+                            <option value="2013100989">奥利奥卡片</option>
+                            <option value="2013100994">落雷凯诺卡片</option>
+                            <option value="2013100996">毒猫王卡片</option>
+                            <option value="2013100999">魔女莉斯卡片</option>
+                            <option value="2013101006">邪恶之眼卡片</option>
+                            <option value="2013101007">暗咒猫妖卡片</option>
+                            <option value="2013101015">冰雪女王洛丝卡片</option>
+                            <option value="2013101017">机械臂捷克卡片</option>
+                            <option value="2013100931">风之涡苏卡片</option>
+                            <option value="2013100958">锤王波罗丁卡片</option>
+                            <option value="2013100959">牛头械王卡片</option>
+                            <option value="2013101003">守护之迈拉卡片</option>
+                            <option value="2013101021">光之沃德咯斯卡片</option>
+                            <option value="2013101026">冰之埃斯顿卡片</option>
+                            <option value="2013101027">火焰之古拉德卡片</option>
+                            <option value="2013100957">虫王戮蛊卡片</option>
+                            <option value="2013101019">疯狂伊凡上校卡片</option>
+                            <option value="2013101028">倔强的哈尼克卡片</option>
+                            <option value="2013101030">投掷哥布林卡片</option>
+                            <option value="2013101031">魔剑阿波菲斯卡片</option>
+                            <option value="2013101033">黄金哥布林卡片</option>
+                            <option value="2013101037">青之塔娜卡片</option>
+                            <option value="2013101035">夕阳之瑞娅-夏季卡片</option>
+                            <option value="2013101038">夕阳之瑞娅-春季卡片</option>
+                            <option value="2013101036">深夜之瑞福卡片</option>
+                            <option value="2013103558">沧海长风武器袖珍罐</option>
+                            <option value="2013103559">猩红狂歌米菲勒卡片</option>
+                            <option value="2013103560">碧蓝幻影克拉尔卡片</option>
+                            <option value="2013103561">夜皇古月卡片</option>
+                            <option value="2013103563">深渊引导者卡片</option>
+                            <option value="2013103564">麦伊斯·波斯特卡片</option>
+                            <option value="2013103565">海默·克拉斯卡片</option>
+                            <option value="2013103566">艾克斯·卡特卡片</option>
+                            <option value="2013103567">女帝斯塔罗贝卡片</option>
+                            <option value="2013103568">血珍珠星野卡片</option>
+                            <option value="2013103569">长脚罗特斯卡片</option>
+                            <option value="2013103570">深海结晶</option>
+                            <option value="2013103571">罗特斯精粹</option>
+                            <option value="2013103584">复活币【人物绑定】</option>
+                            <option value="2013103605">复活币（新角色）</option>
+                            <option value="2013103607">龙之战士武器装扮礼盒</option>
+                            <option value="2013103608">泰拉礼盒（1）</option>
+                            <option value="2013103609">5万金币礼盒</option>
+                            <option value="2013103610">第3凝视之眼礼盒</option>
+                            <option value="2013103611">金猪宝宝宠物礼盒</option>
+                            <option value="2013103615">可疑的气息</option>
+                            <option value="2013103860">便携式强化干扰发射器</option>
+                            <option value="2013103616">[活动]破旧的卡包</option>
+                            <option value="2013103617">[活动]怪物卡包</option>
+                            <option value="2013103618">[活动]防具制作材料礼盒</option>
+                            <option value="2013103647">角色更名卡（1次）</option>
+                            <option value="2013101291">迷妄之塔扫荡券</option>
+                            <option value="2013101309">勇气硬币</option>
+                            <option value="2013104144">灵悦币</option>
+                            <option value="2013104661">[临时]测试好1</option>
+                            <option value="2013104662">【临时】测试品2</option>
+                            <option value="2013106215">暑假硬币</option>
+                            <option value="2013106368">金币</option>
+                            <option value="2013101270">装备品级调整箱</option>
+                            <option value="2013103027">白金徽章随机礼盒（技能）</option>
+                            <option value="2013103045">白金徽章自选礼盒（技能）</option>
+                            <option value="2013000102">疲劳值</option>
+                            <option value="2013000103">疲劳值</option>
+                            <option value="2013000104">疲劳值</option>
+                            <option value="2013000105">疲劳值</option>
+                            <option value="2013000106">疲劳值</option>
+                            <option value="2013100683">装扮兑换券</option>
+                            <option value="2013100880">白色小晶块</option>
+                            <option value="2013100881">红色小晶块</option>
+                            <option value="2013100882">蓝色小晶块</option>
+                            <option value="2013100883">无色小晶块</option>
+                            <option value="2013100884">金色小晶块</option>
+                            <option value="2013100885">黑色小晶块</option>
+                            <option value="2013100892">精炼石</option>
+                            <option value="2013100893">矛盾的结晶体</option>
+                            <option value="2013100894">炉岩炭</option>
+                            <option value="2013104187">炉岩炭（角色绑定）</option>
+                            <option value="2013106066">瑞恩可乐 [账号绑定]</option>
+                            <option value="2013100896">公会资金</option>
+                            <option value="2013100897">贡献币</option>
+                            <option value="2013100898">公会恢复药剂</option>
+                            <option value="2013101039">搜索结果报告：南部溪谷</option>
+                            <option value="2013101040">邪念结晶</option>
+                            <option value="2013101041">搜索结果报告：骑士马战</option>
+                            <option value="2013101455">搜查报告</option>
+                            <option value="2013101319">使命硬币</option>
+                            <option value="2013101321">贡献币</option>
+                            <option value="2013101484">装扮点数</option>
+                            <option value="2013103071">装扮点数</option>
+                            <option value="2013106367">高级头像点数（临时）</option>
+                            <option value="2013102961">随机徽章袖珍罐</option>
+                            <option value="2013103648">魔界抗疲劳秘药</option>
+                            <option value="2013103764">对练场入场券</option>
+                            <option value="2013103786">[测试] 阿拉德的红色徽章碎片</option>
+                            <option value="2013103791">账号成就点数</option>
+                            <option value="2013103809">战神之罐碎片</option>
+                            <option value="2013103810">战神之罐</option>
+                            <option value="2013103812">荣誉武器装扮礼盒</option>
+                            <option value="2013103813">神秘的徽章袖珍罐</option>
+                            <option value="2013103826">装扮合成器碎片</option>
+                            <option value="2013103827">幸运符碎片</option>
+                            <option value="2013103829">萌宠币兑换券碎片</option>
+                            <option value="2013103814">经验值胶囊（2%）</option>
+                            <option value="2013103815">经验值胶囊（3%）</option>
+                            <option value="2013103816">经验值胶囊（4%）</option>
+                            <option value="2013103831">经验值胶囊（5%）</option>
+                            <option value="2013103832">经验值胶囊（6%）</option>
+                            <option value="2013103833">经验值胶囊（8%）</option>
+                            <option value="2013103834">经验值胶囊（1%）</option>
+                            <option value="2013103835">经验值胶囊（12%）</option>
+                            <option value="2013103859">经验值胶囊 （2%）</option>
+                            <option value="2013103841">随机银色徽章</option>
+                            <option value="2013103842">随机公会勋章</option>
+                            <option value="2013103843">银色徽章碎片</option>
+                            <option value="2013103844">公会勋章碎片</option>
+                            <option value="2013103855">小捐款箱</option>
+                            <option value="2013103856">中级捐赠礼盒</option>
+                            <option value="2013103857">高级捐赠礼盒</option>
+                            <option value="2013103852">释放之钥碎片</option>
+                            <option value="2013103858">灯笼武器装扮礼盒碎片</option>
+                            <option value="2013103849">远古王国的宝石</option>
+                            <option value="1990000136">红土</option>
+                            <option value="1990000137">浓缩红土</option>
+                            <option value="1990000138">被遗忘的噩梦的现实</option>
+                            <option value="1990000131">盗墓者的工具箱</option>
+                            <option value="1990000132">哈代的口袋</option>
+                            <option value="1990000133">蕾妮的隐藏盒子</option>
+                            <option value="1990000134">斯库坎的宝箱</option>
+                            <option value="1990000135">巨型努戈尔的战利品箱</option>
+                            <option value="2013103863">幸运符碎片福袋</option>
+                            <option value="2013103861">释放之钥碎片福袋</option>
+                            <option value="2013103423">级小型武器罐</option>
+                            <option value="2013103424">1级中级武器袖珍罐</option>
+                            <option value="2013103425">1级高级武器袖珍罐</option>
+                            <option value="2013103426">1级小型武器罐</option>
+                            <option value="2013103427">1级中级武器袖珍罐</option>
+                            <option value="2013103428">1级高级武器袖珍罐</option>
+                            <option value="2013103429">2级小型武器罐</option>
+                            <option value="2013103430">2级中级武器袖珍罐</option>
+                            <option value="2013103431">2级高级武器袖珍罐</option>
+                            <option value="2013103432">3级小型武器罐</option>
+                            <option value="2013103433">3级中级武器袖珍罐</option>
+                            <option value="2013103434">3级高级武器袖珍罐</option>
+                            <option value="2013103435">4级小型武器罐</option>
+                            <option value="2013103436">4级中级武器袖珍罐</option>
+                            <option value="2013103437">4级高级武器袖珍罐</option>
+                            <option value="2013103438">5级小型武器罐</option>
+                            <option value="2013103439">5级中级武器袖珍罐</option>
+                            <option value="2013103440">5级高级武器袖珍罐</option>
+                            <option value="2013103441">1级下级防具袖珍罐</option>
+                            <option value="2013103442">1级中级防具袖珍罐</option>
+                            <option value="2013103443">1级高级防具袖珍罐</option>
+                            <option value="2013103444">1级小型装甲罐</option>
+                            <option value="2013103445">1级中级防具袖珍罐</option>
+                            <option value="2013103446">1级高级防具袖珍罐</option>
+                            <option value="2013103447">2级小型装甲罐</option>
+                            <option value="2013103448">2级中级防具袖珍罐</option>
+                            <option value="2013103449">2级高级防具袖珍罐</option>
+                            <option value="2013103450">3级小型装甲罐</option>
+                            <option value="2013103451">3级中级防具袖珍罐</option>
+                            <option value="2013103452">3级高级防具袖珍罐</option>
+                            <option value="2013103453">4级小型装甲罐</option>
+                            <option value="2013103454">4级中级防具袖珍罐</option>
+                            <option value="2013103455">4级高级防具袖珍罐</option>
+                            <option value="2013103456">5 级小型装甲罐</option>
+                            <option value="2013103457">5级中级防具袖珍罐</option>
+                            <option value="2013103458">5级高级防具袖珍罐</option>
+                            <option value="2013103459">1 级小型配件罐</option>
+                            <option value="2013103460">1级中级首饰袖珍罐</option>
+                            <option value="2013103461">1级高级首饰袖珍罐</option>
+                            <option value="2013103462">1 级小型配件罐</option>
+                            <option value="2013103463">1级中级首饰袖珍罐</option>
+                            <option value="2013103464">1级高级首饰袖珍罐</option>
+                            <option value="2013103465">2级小型配件罐</option>
+                            <option value="2013103466">2级中级首饰袖珍罐</option>
+                            <option value="2013103467">2级高级首饰袖珍罐</option>
+                            <option value="2013103468">3级小型配件罐</option>
+                            <option value="2013103469">3级中级首饰袖珍罐</option>
+                            <option value="2013103470">3级高级首饰袖珍罐</option>
+                            <option value="2013103471">4级小型配件罐</option>
+                            <option value="2013103472">4级中级首饰袖珍罐</option>
+                            <option value="2013103473">4级高级首饰袖珍罐</option>
+                            <option value="2013103474">5级小型配件罐</option>
+                            <option value="2013103475">5级中级首饰袖珍罐</option>
+                            <option value="2013103476">5级高级首饰袖珍罐</option>
+                            <option value="2013103495">下级金币袖珍罐</option>
+                            <option value="2013103496">中级金币袖珍罐</option>
+                            <option value="2013103497">高级金币袖珍罐</option>
+                            <option value="2013103498">下级泰拉礼盒</option>
+                            <option value="2013103499">中级泰拉礼盒</option>
+                            <option value="2013103500">高级泰拉礼盒</option>
+                            <option value="2013103501">海岸三番街卡包</option>
+                            <option value="2013103502">安特贝鲁峡谷卡包</option>
+                            <option value="2013103503">1级达成纪念礼盒</option>
+                            <option value="2013103506">3级达成纪念礼盒</option>
+                            <option value="2013103507">4级达成纪念礼盒</option>
+                            <option value="2013103508">5级达成纪念礼盒</option>
+                            <option value="2013103513">下级灵魂袖珍罐</option>
+                            <option value="2013103514">中级灵魂袖珍罐</option>
+                            <option value="2013103516">下级卡片袖珍罐</option>
+                            <option value="2013103517">中级卡片袖珍罐</option>
+                            <option value="2013103519">堕落之殿卡包</option>
+                            <option value="2013103520">斯顿雪域卡包</option>
+                            <option value="2013103521">阿法利亚卡包</option>
+                            <option value="2013103522">诺斯玛尔卡包</option>
+                            <option value="2013103554">古老战利品礼盒</option>
+                            <option value="2013103555">平凡战利品礼盒</option>
+                            <option value="2013103556">闪耀战利品礼盒</option>
+                            <option value="2013103822">灿烂的银色徽章礼盒</option>
+                            <option value="2013103823">华丽的银色徽章礼盒</option>
+                            <option value="2013103824">闪耀的银色徽章礼盒</option>
+                            <option value="2013103825">防具制作材料礼盒</option>
+                            <option value="2013101317">冒险者的游戏卡包</option>
+                            <option value="2013101103">格兰之森卡包</option>
+                            <option value="2013101104">天空之城卡包</option>
+                            <option value="2013101105">天帷巨兽卡包</option>
+                            <option value="2013101106">诺伊佩拉卡包</option>
+                            <option value="2013101107">暗黑城卡包</option>
+                            <option value="2013101303">下级怪物卡包</option>
+                            <option value="2013101304">中级怪物卡包</option>
+                            <option value="2013103477">+7强化武器礼盒（1级）</option>
+                            <option value="2013103478">+7强化武器礼盒（2级）</option>
+                            <option value="2013103479">+7强化武器礼盒（3级）</option>
+                            <option value="2013103480">+7强化武器礼盒（4级）</option>
+                            <option value="2013103481">+7强化武器礼盒（5级）</option>
+                            <option value="2013103482">+7强化防具礼盒（1级）</option>
+                            <option value="2013103483">+7强化防具礼盒（2级）</option>
+                            <option value="2013103484">+7强化防具礼盒（3级）</option>
+                            <option value="2013103485">+7强化防具礼盒（4级）</option>
+                            <option value="2013103486">+7强化防具礼盒（5级）</option>
+                            <option value="2013103046">灿烂的白金徽章礼盒</option>
+                            <option value="2013103853">华丽的白金徽章礼盒</option>
+                            <option value="2013103854">闪耀的白金徽章礼盒</option>
+                            <option value="2013103828">（旧）冒险队每日奖励</option>
+                            <option value="2013103867">下级宝石礼盒</option>
+                            <option value="2013104916">51级达成纪念礼盒</option>
+                            <option value="2013104917">52级达成纪念礼盒</option>
+                            <option value="2013104918">53级达成纪念礼盒</option>
+                            <option value="2013104919">54级达成纪念礼盒</option>
+                            <option value="2013103865">闪亮的深渊派对邀请函礼盒</option>
+                            <option value="2013103866">浅海的深渊派对邀请函礼盒</option>
+                            <option value="2013103880">神奈的礼物盒</option>
+                            <option value="2013103881">奥兰的礼盒</option>
+                            <option value="2013103882">赛丽亚的礼盒</option>
+                            <option value="10326867">[未使用] 神无的礼物盒</option>
+                            <option value="2013100919">[未使用]哥布林卡片</option>
+                            <option value="2013100932">[未使用]怨恨之摩根卡片</option>
+                            <option value="2013100930">长脚罗特斯卡片</option>
+                            <option value="2013100956">狄瑞吉的幻影卡片</option>
+                            <option value="2013101032">暴戾搜捕团诺比斯卡片</option>
+                            <option value="2013100992">[未使用]审判者马塞尔卡片</option>
+                            <option value="2013101014">[未使用]艾克洛索卡片</option>
+                            <option value="2013101022">[未使用]西克特卡片</option>
+                            <option value="2013101023">[未使用]裴特舒·帕菲斯卡片</option>
+                            <option value="2013101025">[未使用]机械吉赛尔卡片</option>
+                            <option value="2013101029">[未使用]蛊狱息卡片</option>
+                            <option value="2013101069">异世界之斯卡萨卡片</option>
+                            <option value="2013101070">异世界之斯皮兹卡片</option>
+                            <option value="2013103562">[未使用]尼雅卡片</option>
+                            <option value="2013103883">[未使用]水母公主艾尔乐卡片</option>
+                            <option value="2013103884">[未使用]休可卡片</option>
+                            <option value="2013103941">无色立方体</option>
+                            <option value="2013103942">仿制的深渊宝珠</option>
+                            <option value="2013103944">宠物饼干</option>
+                            <option value="2013103946">[临时] 测试宝珠 1</option>
+                            <option value="2013103947">[临时] 测试宝珠 2</option>
+                            <option value="2013103948">[临时] 测试宝珠 3</option>
+                            <option value="2013103949">[临时] 测试宝珠 4</option>
+                            <option value="2013104119">[临时] 测试宝珠 5</option>
+                            <option value="2013103964">深渊派对邀请函礼盒（5张）</option>
+                            <option value="2013103966">[临时] 测试更改权 - 标题</option>
+                            <option value="2013103967">[临时]测试更改权-生物</option>
+                            <option value="2013103965">[临时] 测试更改票 - 突袭装备</option>
+                            <option value="2013104118">[临时]测试更改权-生物神器</option>
+                            <option value="2013104120">[临时] 测试更改票 - 徽章</option>
+                            <option value="2013103988">红色徽章[所有统计]</option>
+                            <option value="2013103989">红色徽章[所有统计]</option>
+                            <option value="2013103990">红色徽章[所有统计]</option>
+                            <option value="2013103991">红色徽章[所有统计]</option>
+                            <option value="2013103992">红色徽章[所有统计]</option>
+                            <option value="2013103993">红色徽章[所有统计]</option>
+                            <option value="2013103994">红色徽章[所有统计]</option>
+                            <option value="2013103995">红色徽章[所有统计]</option>
+                            <option value="2013103996">红色徽章[所有统计]</option>
+                            <option value="2013103997">红色徽章[所有统计]</option>
+                            <option value="2013103998">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013103999">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104000">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104001">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104002">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104003">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104004">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104005">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104006">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104007">黄色徽章【攻击速度、施法速度】</option>
+                            <option value="2013104008">绿徽【关键】</option>
+                            <option value="2013104009">绿徽【关键】</option>
+                            <option value="2013104010">绿徽【关键】</option>
+                            <option value="2013104011">绿徽【关键】</option>
+                            <option value="2013104012">绿徽【关键】</option>
+                            <option value="2013104013">绿徽【关键】</option>
+                            <option value="2013104014">绿徽【关键】</option>
+                            <option value="2013104015">绿徽【关键】</option>
+                            <option value="2013104016">绿徽【关键】</option>
+                            <option value="2013104017">绿徽【关键】</option>
+                            <option value="2013104018">蓝色徽章【移动速度】</option>
+                            <option value="2013104019">蓝色徽章【移动速度】</option>
+                            <option value="2013104020">蓝色徽章【移动速度】</option>
+                            <option value="2013104021">蓝色徽章【移动速度】</option>
+                            <option value="2013104022">蓝色徽章【移动速度】</option>
+                            <option value="2013104023">蓝色徽章【移动速度】</option>
+                            <option value="2013104024">蓝色徽章【移动速度】</option>
+                            <option value="2013104025">蓝色徽章【移动速度】</option>
+                            <option value="2013104026">蓝色徽章【移动速度】</option>
+                            <option value="2013104027">蓝色徽章【移动速度】</option>
+                            <option value="2013104028">白金徽章【LV5技能】</option>
+                            <option value="2013104029">白金徽章【LV5技能】</option>
+                            <option value="2013104030">白金徽章【LV5技能】</option>
+                            <option value="2013104031">白金徽章【LV5技能】</option>
+                            <option value="2013104032">白金徽章【LV5技能】</option>
+                            <option value="2013104033">白金徽章【LV5技能】</option>
+                            <option value="2013104034">白金徽章【LV5技能】</option>
+                            <option value="2013104035">白金徽章【LV5技能】</option>
+                            <option value="2013104036">白金徽章【LV5技能】</option>
+                            <option value="2013104037">白金徽章【LV5技能】</option>
+                            <option value="2013104038">白金徽章【LV10技能】</option>
+                            <option value="2013104039">白金徽章【LV10技能】</option>
+                            <option value="2013104040">白金徽章【LV10技能】</option>
+                            <option value="2013104041">白金徽章【LV10技能】</option>
+                            <option value="2013104042">白金徽章【LV10技能】</option>
+                            <option value="2013104043">白金徽章【LV10技能】</option>
+                            <option value="2013104044">白金徽章【LV10技能】</option>
+                            <option value="2013104045">白金徽章【LV10技能】</option>
+                            <option value="2013104046">白金徽章【LV10技能】</option>
+                            <option value="2013104047">白金徽章【LV10技能】</option>
+                            <option value="2013104048">白金徽章【LV15技能】</option>
+                            <option value="2013104049">白金徽章【LV15技能】</option>
+                            <option value="2013104050">白金徽章【LV15技能】</option>
+                            <option value="2013104051">白金徽章【LV15技能】</option>
+                            <option value="2013104052">白金徽章【LV15技能】</option>
+                            <option value="2013104053">白金徽章【LV15技能】</option>
+                            <option value="2013104054">白金徽章【LV15技能】</option>
+                            <option value="2013104055">白金徽章【LV15技能】</option>
+                            <option value="2013104056">白金徽章【LV15技能】</option>
+                            <option value="2013104057">白金徽章【LV15技能】</option>
+                            <option value="2013104058">白金徽章【LV20技能】</option>
+                            <option value="2013104059">白金徽章【LV20技能】</option>
+                            <option value="2013104060">白金徽章【LV20技能】</option>
+                            <option value="2013104061">白金徽章【LV20技能】</option>
+                            <option value="2013104062">白金徽章【LV20技能】</option>
+                            <option value="2013104063">白金徽章【LV20技能】</option>
+                            <option value="2013104064">白金徽章【LV20技能】</option>
+                            <option value="2013104065">白金徽章【LV20技能】</option>
+                            <option value="2013104066">白金徽章【LV20技能】</option>
+                            <option value="2013104067">白金徽章【LV20技能】</option>
+                            <option value="2013104068">白金徽章【LV25技能】</option>
+                            <option value="2013104069">白金徽章【LV25技能】</option>
+                            <option value="2013104070">白金徽章【LV25技能】</option>
+                            <option value="2013104071">白金徽章【LV25技能】</option>
+                            <option value="2013104072">白金徽章【LV25技能】</option>
+                            <option value="2013104073">白金徽章【LV25技能】</option>
+                            <option value="2013104074">白金徽章【LV25技能】</option>
+                            <option value="2013104075">白金徽章【LV25技能】</option>
+                            <option value="2013104076">白金徽章【LV25技能】</option>
+                            <option value="2013104077">白金徽章【LV25技能】</option>
+                            <option value="2013104078">白金徽章【LV30技能】</option>
+                            <option value="2013104079">白金徽章【LV30技能】</option>
+                            <option value="2013104080">白金徽章【LV30技能】</option>
+                            <option value="2013104081">白金徽章【LV30技能】</option>
+                            <option value="2013104082">白金徽章【LV30技能】</option>
+                            <option value="2013104083">白金徽章【LV30技能】</option>
+                        </select>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-icon layui-icon-username" for="password"></label>
+                        <input type="text" name="num" lay-verify="required|password" placeholder="请输入数量"
+                            autocomplete="off" class="layui-input" value="">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn layui-btn-normal layui-btn-fluid" lay-submit=""
+                            lay-filter="login">确 定
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="lib/jquery-3.4.1/jquery-3.4.1.min.js" charset="utf-8"></script>
+    <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+    <script src="lib/jq-module/jquery.particleground.min.js" charset="utf-8"></script>
+    <script>
+        layui.use(['form'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+
+            // 进行登录操作
+            form.on('submit(login)', function (data) {
+                data = data.field;
+
+                var index = layer.load(1, { shade: [0.1, '#fff'] });
+
+                $.ajax({
+                    url: '/send',
+                    type: 'post',
+                    dataType: 'json',
+                    data: { username: data.user, itemNo: data.item, itemNum: data.num, code: data.pass },
+                    success: function (data) {
+                        layer.close(index);
+                        if (data.code === 200) {
+                            if (typeof data.message == "string") {
+                                layer.msg(data.message);
+                            } else {
+                                layer.msg(JSON.stringify(data.message));
+                            }
+                        } else {
+                            layer.msg('服务器错误！');
+                        }
+                    },
+                    error: function (error) {
+                        try {
+                            layer.close(index);
+                            layer.msg('服务器错误！');
+                        } catch (e) {
+                            console.log(e)
+                        }
+                    }
+                });
+
+
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

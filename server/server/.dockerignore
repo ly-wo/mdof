@@ -1,0 +1,7 @@
+.dockerignore
+Dockerfile
+log
+game.bat
+*.DS_Store
+game.properties
+application.properties

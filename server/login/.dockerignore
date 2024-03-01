@@ -1,0 +1,5 @@
+application.yml
+Dockerfile
+.dockerignore
+login.bat
+*.DS_Store

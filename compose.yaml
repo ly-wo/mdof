@@ -1,0 +1,56 @@
+version: '3'
+
+networks:
+  traefik:
+    external: true
+
+services:
+  mysql:
+    image: ${IMAGE_PREFIX}mysql:latest
+    build: server/mysql
+    hostname: ${MYSQL_LOGIN_HOST}
+    ports:
+      - ${MYSQL_LOGIN_PORT}:${MYSQL_LOGIN_PORT}
+    env_file:
+      - .env
+    networks:
+      - traefik
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./log/mysql:/var/log/mysql
+
+  gm:
+    image: ${IMAGE_PREFIX}gm:latest
+    build: server/gm
+    hostname: gm.svc
+    env_file:
+      - .env
+    ports:
+      - 8080:${WEB_PORT}
+    networks:
+      - traefik
+
+  login:
+    image: ${IMAGE_PREFIX}login-server:latest
+    build: server/login
+    hostname: login.svc
+    env_file:
+      - .env
+    ports:
+      - 80:${LOGIN_SERVER_PORT}
+    networks:
+      - traefik
+
+  server:
+    image: ${IMAGE_PREFIX}game-server:latest
+    build: server/server
+    hostname: server.svc
+    env_file:
+      - .env
+    ports:
+      - 20001:${GM_SERVER_PORT}
+      - 10001:${GAME_SERVER_PORT}
+    networks:
+      - traefik
+    volumes:
+      - ./log/game:/app/log

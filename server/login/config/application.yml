@@ -1,0 +1,45 @@
+server:
+  port: LOGIN_SERVER_PORT
+  servlet:
+    context-path: /
+
+nutz:
+  dao:
+    runtime:
+      basepackage: com.example.dnfhttp
+      create: true
+      delete-column: false
+      migration: true
+    sqlmanager:
+      paths:
+        '-': sqls
+#  json:
+#    auto-unicode: false
+#    enabled: true
+#    ignore-null: true
+#    mode: compact
+#    null-as-emtry: true
+#    quote-name: true
+
+#datasource
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://MYSQL_LOGIN_HOST:MYSQL_LOGIN_PORT/MYSQL_LOGIN_SCHEMA?characterEncoding=utf8&autoReconnect=true&failOverReadOnly=false&maxReconnects=10&useSSL=false
+    username: MYSQL_LOGIN_USERNAME
+    password: MYSQL_LOGIN_PASSWORD
+    druid:
+      initial-size: 5
+      max-active: 50
+      max-wait: 3000
+      pool-prepared-statements: true
+      use-unfair-lock: true
+
+dnf:
+  mHost: LOGIN_SERVER_HOST
+  mPort: LOGIN_SERVER_PORT
+  ossHost: OSS_ADDR
+
